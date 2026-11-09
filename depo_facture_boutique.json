@@ -1,0 +1,31 @@
+{
+  "type": "depo_facture_boutique",
+  "magasin": "Jeux et Accessoires",
+  "produits": [
+    {
+      "nom": "Super Nintendo",
+      "quantite": 1,
+      "prix": 100,
+      "unite": "shekel"
+    },
+    {
+      "nom": "Deux câbles",
+      "quantite": 1,
+      "prix": 100,
+      "unite": "shekel"
+    },
+    {
+      "nom": "Manette",
+      "quantite": 1,
+      "prix": 100,
+      "unite": "shekel"
+    }
+  ],
+  "total_partiel": 300,
+  "montant_encaise": 424.07,
+  "devise": "ILS",
+  "devise_symbole": "₪",
+  "mode_paiement": "page_pseudo_intermediaire",
+  "date": "2026-11-09",
+  "description": "Depot facture boutique avec paiement intermédiaire"
+}

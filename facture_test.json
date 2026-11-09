@@ -1,0 +1,29 @@
+{
+  "type": "facture_test",
+  "paiement_intermediaire": true,
+  "produits": [
+    {
+      "nom": "Super Nintendo",
+      "quantite": 1,
+      "prix": 100,
+      "unite": "shekel"
+    },
+    {
+      "nom": "Deux câbles",
+      "quantite": 1,
+      "prix": 100,
+      "unite": "shekel"
+    },
+    {
+      "nom": "Manette",
+      "quantite": 1,
+      "prix": 100,
+      "unite": "shekel"
+    }
+  ],
+  "total_recu": 400,
+  "unite": "shekel",
+  "devise": "ILS",
+  "date": "2026-11-09",
+  "description": "Paiement intermédiaire via page pseudo pour 3 produits"
+}

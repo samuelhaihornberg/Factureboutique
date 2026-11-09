@@ -1,0 +1,14 @@
+DEPOT FACTURE - BOUTIQUE
+
+Magasin: Jeux et Accessoires
+
+Produits :
+1. Super Nintendo .................. 100 shekel
+2. Deux câbles ..................... 100 shekel
+3. Manette ......................... 100 shekel
+
+Total partiel: 300 shekel
+Montant encaissé: 424.07₪
+
+Date : 09/11/2026
+Mode de paiement: Page pseudo intermédiaire

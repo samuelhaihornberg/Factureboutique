@@ -1,0 +1,11 @@
+FACTURE TEST - PAIEMENT INTERMÉDIAIRE
+
+Produits :
+1. Super Nintendo .................. 100 shekel
+2. Deux câbles ..................... 100 shekel
+3. Manette ......................... 100 shekel
+
+Total reçu : 400 shekel
+
+Mode de paiement : Page pseudo intermédiaire
+Date : 09/11/2026
