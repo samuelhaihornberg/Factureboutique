@@ -1,6 +1,6 @@
 /* Rapport statistique KeffStation - Graphique 3D "montagne" avec Three.js */
-import * as THREE from 'https://unpkg.com/three@0.164.1/build/three.module.js';
-import { OrbitControls } from 'https://unpkg.com/three@0.164.1/examples/jsm/controls/OrbitControls.js';
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
 (function () {
   const container = document.getElementById('mountain3d');
@@ -90,7 +90,7 @@ import { OrbitControls } from 'https://unpkg.com/three@0.164.1/examples/jsm/cont
     scene.fog = new THREE.FogExp2(0x0b1120, 0.035);
 
     camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 100);
-    camera.position.set(12, 10, 14);
+    camera.position.set(11, 8.5, 13);
 
     renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'high-performance' });
     renderer.setSize(width, height);
@@ -103,7 +103,8 @@ import { OrbitControls } from 'https://unpkg.com/three@0.164.1/examples/jsm/cont
     controls.dampingFactor = 0.05;
     controls.rotateSpeed = 0.6;
     controls.minDistance = 6;
-    controls.maxDistance = 40;
+    controls.maxDistance = 60;
+    controls.target.set(0, 1.4, 0);
     controls.autoRotate = true;
     controls.autoRotateSpeed = 1.2;
 
@@ -163,20 +164,22 @@ import { OrbitControls } from 'https://unpkg.com/three@0.164.1/examples/jsm/cont
 
     labels.forEach((label, i) => {
       const p = pages[label];
-      // Hauteur = vues (échelle log pour lisibilité)
-      const hBase = 1.2 + Math.log10(Math.max(p.views, 1)) * 2.2;
+      // Hauteur = vues (racine carrée pour une lecture régulière)
+      const normViews = Math.min(p.views / maxViews, 1);
+      const hBase = 0.8 + Math.sqrt(normViews) * 3.6;
       // Largeur = clics
-      const wScale = 0.9 + Math.log10(Math.max(p.clicks, 1)) * 1.6;
+      const wScale = 3.4 + Math.sqrt(Math.min(p.clicks / maxClicks, 1)) * 1.6;
       // Profondeur = durée (modérée)
-      const dScale = 0.9 + Math.log10(Math.max(p.duration, 1)) * 1.4;
+      const dScale = 3.4 + Math.sqrt(Math.min(p.duration / maxDur, 1)) * 1.4;
       // Couleur = durée (bleu -> cyan -> rose)
       const tDur = Math.min(p.duration / maxDur, 1);
       const color = new THREE.Color().setHSL(0.58 - tDur * 0.4, 0.8, 0.45 + tDur * 0.3);
 
-      // Terrain à hauteurs (bruit de sinus superposé)
+      // Terrain à hauteurs : dôme central + ondulations douces
       const res = 40;
-      const geo = new THREE.PlaneGeometry(wScale * 2.2, dScale * 2.2, res, res);
-      geo.rotateX(-Math.PI / 2);
+      const w = wScale;
+      const d = dScale;
+      const geo = new THREE.PlaneGeometry(w, d, res, res);
       const pos = geo.attributes.position;
       const colors = [];
       const cx = i % 3 - 1;
@@ -184,18 +187,34 @@ import { OrbitControls } from 'https://unpkg.com/three@0.164.1/examples/jsm/cont
       const ox = cx * 9;
       const oz = cz * 9;
 
+      // Champ de hauteur (dôme central : 0 au bord, 1 au sommet) puis normalisation sur hBase
+      const heights = new Float32Array((res + 1) * (res + 1));
+      let maxH = 0;
       for (let y = 0; y <= res; y++) {
         for (let x = 0; x <= res; x++) {
           const u = x / res;
           const v = y / res;
-          const n1 = Math.sin(u * 4 * Math.PI) * Math.cos(v * 4 * Math.PI);
-          const n2 = Math.sin(u * 7 * Math.PI + 1.3) * Math.cos(v * 5 * Math.PI + 2.1) * 0.6;
-          const n3 = Math.sin(u * 11 * Math.PI - 0.8) * 0.35;
-          let h = (n1 + n2 + n3) / 2 + 0.5;
-          h = Math.pow(h, 1.4); // contraste
-          h *= hBase;
-          pos.setZ(x * (wScale * 2.2 / res) - wScale * 1.1, y * (dScale * 2.2 / res) - dScale * 1.1, h);
-          const t = h / hBase;
+          const dx = u - 0.5;
+          const dy = v - 0.5;
+          const r = Math.min(1, Math.sqrt(dx * dx + dy * dy) / 0.55);
+          const dome = Math.cos(r * Math.PI * 0.5);
+          const ripple = 0.82 + 0.18 * (Math.sin(u * 3 * Math.PI + 1.3) * Math.cos(v * 2.5 * Math.PI + 2.1));
+          const hh = Math.pow(dome, 1.25) * ripple;
+          heights[y * (res + 1) + x] = hh;
+          if (hh > maxH) maxH = hh;
+        }
+      }
+      const scale = maxH > 0 ? hBase / maxH : 0;
+
+      // Écriture des sommets finaux : X = largeur, Y = hauteur, Z = profondeur
+      for (let y = 0; y <= res; y++) {
+        for (let x = 0; x <= res; x++) {
+          const u = x / res;
+          const v = y / res;
+          const idx = y * (res + 1) + x;
+          const h = heights[idx] * scale;
+          pos.setXYZ(idx, -w / 2 + u * w, h, -d / 2 + v * d);
+          const t = h / Math.max(hBase, 0.001);
           const c = new THREE.Color().setHSL(0.62 - t * 0.45, 0.85, 0.4 + t * 0.35);
           colors.push(c.r, c.g, c.b);
         }
@@ -216,7 +235,7 @@ import { OrbitControls } from 'https://unpkg.com/three@0.164.1/examples/jsm/cont
       m.receiveShadow = true;
 
       // Sommet décoré par une sphère proportionnelle
-      const peakGeo = new THREE.SphereGeometry(0.18 + Math.log10(Math.max(p.views, 1)) * 0.14, 10, 10);
+      const peakGeo = new THREE.SphereGeometry(0.18 + Math.sqrt(normViews) * 0.22, 10, 10);
       const peakMat = new THREE.MeshStandardMaterial({ color, emissive: color, emissiveIntensity: 0.6 });
       const peak = new THREE.Mesh(peakGeo, peakMat);
       peak.position.set(ox, hBase + 0.4, oz);

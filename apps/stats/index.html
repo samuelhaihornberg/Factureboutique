@@ -6,9 +6,15 @@
   <title>Rapport statistique - KeffStation</title>
   <link rel="stylesheet" href="css/style.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
-  <!-- Three.js via CDN -->
-  <script src="https://unpkg.com/three@0.164.1/build/three.min.js"></script>
-  <script src="https://unpkg.com/three@0.164.1/examples/js/controls/OrbitControls.js"></script>
+  <!-- Three.js (module) + OrbitControls : importmap requis (spécificateur nu « three ») -->
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://unpkg.com/three@0.164.1/build/three.module.js",
+      "three/addons/": "https://unpkg.com/three@0.164.1/examples/jsm/"
+    }
+  }
+  </script>
 </head>
 <body>
 
