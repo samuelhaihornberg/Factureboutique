@@ -3,103 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Facture fictive - KeffStation par App</title>
-  <link rel="stylesheet" href="css/style.css">
+  <title>KeffStation - Vitrine multi-apps</title>
+  <meta http-equiv="refresh" content="0; url=apps/vitrine/index.html">
+  <meta name="robots" content="noindex">
+  <style>
+    body { font-family: system-ui, sans-serif; background:#0f172a; color:#fff; display:flex; align-items:center; justify-content:center; height:100vh; margin:0; }
+    .card { background:#1e293b; padding:40px; border-radius:16px; box-shadow:0 20px 50px rgba(0,0,0,.5); text-align:center; border:1px solid #334155; }
+    h1 { margin:0 0 12px; color:#38bdf8; }
+    p { margin:0 0 20px; color:#cbd5e1; }
+    a { color:#38bdf8; text-decoration:none; font-weight:600; }
+    a:hover { text-decoration:underline; }
+  </style>
 </head>
 <body>
-
-  <div class="invoice-container">
-
-    <header class="invoice-header">
-      <div class="brand">
-        <div class="logo">KeffStation</div>
-        <div class="subtitle">par App</div>
-      </div>
-      <div class="company">
-        <strong>KeffStation par App</strong><br>
-        123 Avenue du Numérique<br>
-        75000 Paris, France<br>
-        contact@keffstation.app<br>
-        SIRET 123 456 789 00010
-      </div>
-      <div class="meta">
-        <h1>FACTURE</h1>
-        <div class="meta-grid">
-          <div><strong>N° Facture:</strong> <span id="invoice-number">F-2026-001</span></div>
-          <div><strong>Date:</strong> <span id="invoice-date"></span></div>
-          <div><strong>Échéance:</strong> <span id="invoice-due"></span></div>
-        </div>
-      </div>
-    </header>
-
-    <div class="parties">
-      <div class="party from">
-        <h3>Émetteur</h3>
-        <div id="from-details">
-          KeffStation par App<br>
-          123 Avenue du Numérique<br>
-          75000 Paris, France
-        </div>
-      </div>
-      <div class="party to">
-        <h3>Facturé à</h3>
-        <div id="to-details" contenteditable="true">
-          <strong>Client fictif</strong><br>
-          45 Rue de l'Exemple<br>
-          69000 Lyon, France<br>
-          client@exemple.com
-        </div>
-      </div>
-    </div>
-
-    <table class="items-table">
-      <thead>
-        <tr>
-          <th>Description</th>
-          <th class="right">Qté</th>
-          <th class="right">Prix unitaire</th>
-          <th class="right">Total</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody id="items-body"></tbody>
-      <tfoot>
-        <tr>
-          <td colspan="4">
-            <button type="button" id="add-row">+ Ajouter un article</button>
-          </td>
-          <td></td>
-        </tr>
-      </tfoot>
-    </table>
-
-    <div class="totals">
-      <div class="total-row">
-        <span>Sous-total (HT)</span>
-        <span class="right" id="subtotal">0,00</span> <span class="currency">FCFA</span>
-      </div>
-      <div class="total-row">
-        <span>TVA (20 %)</span>
-        <span class="right" id="tax">0,00</span> <span class="currency">FCFA</span>
-      </div>
-      <div class="total-row grand">
-        <span>TOTAL TTC</span>
-        <span class="right" id="grand-total">0,00</span> <span class="currency">FCFA</span>
-      </div>
-    </div>
-
-    <div class="footer">
-      <p>Merci pour votre confiance chez <strong>KeffStation par App</strong>.</p>
-      <p><em>Facture générée à des fins de test de revenu — document fictif.</em></p>
-    </div>
-
-    <div class="actions">
-      <button onclick="window.print()">🖨️ Imprimer la facture</button>
-      <button id="reset-form">🔄 Réinitialiser</button>
-    </div>
-
+  <div class="card">
+    <h1>KeffStation</h1>
+    <p>Redirection vers la vitrine multi-apps&#8230;</p>
+    <p>Si vous n'&ecirc;tes pas redirig&eacute;, cliquez : <a href="apps/vitrine/index.html">Aller &agrave; la vitrine</a></p>
   </div>
-
-  <script src="js/script.js"></script>
+  <script>location.replace('apps/vitrine/index.html');</script>
 </body>
 </html>

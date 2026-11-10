@@ -1,0 +1,35 @@
+{
+  "generated": "2026-11-10",
+  "note": "Données de référence pour la démonstration du rapport KeffStation.",
+  "pages": {
+    "apps/vitrine/index.html": {
+      "label": "Vitrine",
+      "views": 1240,
+      "clicks": 312,
+      "duration": 3420
+    },
+    "apps/factureboutique/index.html": {
+      "label": "Facture Boutique",
+      "views": 890,
+      "clicks": 145,
+      "duration": 5100
+    },
+    "apps/admin/index.html": {
+      "label": "Espace Admin",
+      "views": 67,
+      "clicks": 22,
+      "duration": 980
+    },
+    "apps/stats/index.html": {
+      "label": "Rapport statistiques",
+      "views": 210,
+      "clicks": 89,
+      "duration": 2450
+    }
+  },
+  "totals": {
+    "views": 2407,
+    "clicks": 568,
+    "duration": 11950
+  }
+}

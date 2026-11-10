@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vitrine - KeffStation multi-apps</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="brand">KeffStation <span class="badge">par App</span></div>
+    <div class="nav-links">
+      <a href="#applications">Applications</a>
+      <a href="#rapports">Rapports</a>
+      <a href="#" class="btn-admin" id="btnAdmin">Admin</a>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Vitrine multi-apps <span class="accent">KeffStation</span></h1>
+      <p>Une plateforme unique r&eacute;unissant plusieurs applications : facturation, statistiques, administration et plus encore.</p>
+      <div class="hero-actions">
+        <a href="#applications" class="btn btn-primary">Voir les applications</a>
+        <a href="apps/stats/index.html" class="btn btn-outline">Rapport statistique</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="mountain-icon">&#9728;</div>
+    </div>
+  </section>
+
+  <section id="applications" class="apps-section">
+    <div class="container">
+      <h2>Nos applications</h2>
+      <div class="apps-grid">
+        <article class="app-card">
+          <div class="app-icon">&#128202;</div>
+          <h3>Facture Boutique</h3>
+          <p>G&eacute;n&eacute;ration de factures fictives pour test, TVA, totaux, impression.</p>
+          <a href="apps/factureboutique/index.html" class="btn btn-sm">Ouvrir l'app</a>
+        </article>
+        <article class="app-card">
+          <div class="app-icon">&#128200;</div>
+          <h3>Tableau de bord</h3>
+          <p>Vue d'ensemble de vos activit&eacute;s et indicateurs cl&eacute;s.</p>
+          <a href="#" class="btn btn-sm disabled">Bient&ocirc;t disponible</a>
+        </article>
+        <article class="app-card">
+          <div class="app-icon">&#128196;</div>
+          <h3>Espace Admin</h3>
+          <p>Acc&egrave;s restreint prot&eacute;g&eacute; par une cl&eacute; de s&eacute;curit&eacute;.</p>
+          <a href="#" class="btn btn-sm" id="btnOpenAdmin">Ouvrir l'admin</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="rapports" class="stats-section">
+    <div class="container">
+      <h2>Rapport en direct</h2>
+      <div class="stat-row">
+        <div class="stat">
+          <div class="stat-value" id="statViews">-</div>
+          <div class="stat-label">Vues de pages</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value" id="statClicks">-</div>
+          <div class="stat-label">Clics</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value" id="statDuration">-</div>
+          <div class="stat-label">Dur&eacute;e moyenne (s)</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value" id="statPages">-</div>
+          <div class="stat-label">Pages suivies</div>
+        </div>
+      </div>
+      <p class="note">D&eacute;tail compl&egrave;t et graphique 3D : <a href="apps/stats/index.html">Rapport statistique complet</a></p>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2026 KeffStation par App. Projet fictif &agrave; des fins de d&e9monstration.</p>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

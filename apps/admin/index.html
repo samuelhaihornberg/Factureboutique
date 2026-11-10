@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin - Connexion KeffStation</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700;900&display=swap" rel="stylesheet">
+  <script type="module">
+    import { ADMIN_KEY } from './config.js';
+    window.__KEFF_ADMIN_KEY = ADMIN_KEY;
+  </script>
+</head>
+<body>
+
+  <div class="admin-shell">
+    <aside class="admin-sidebar">
+      <div class="brand">KeffStation <span class="dot"></span>Admin</div>
+      <p class="sub">Espace d'administration restreint</p>
+    </aside>
+
+    <main class="admin-main">
+      <header class="admin-header">
+        <h1>Connexion Admin</h1>
+        <p>Saisissez la clé de sécurité (100 caractères) générée pour ce dépôt.</p>
+      </header>
+
+      <div class="card">
+        <div class="alert alert-info" id="msgKey" style="display:none;">
+          Clé de d&e9mo : <code id="codeKey"></code>
+        </div>
+        <form id="loginForm">
+          <div class="field">
+            <label for="adminKey">Clé d'administration</label>
+            <input type="password" id="adminKey" name="adminKey" placeholder="Coller la clé de 100 caractères&#8230;" maxlength="200" autocomplete="off" required>
+            <span class="hint">Clé générée : 100 caract&egrave;res alphanum&e9riques</span>
+          </div>
+          <div class="field-actions">
+            <button type="button" id="btnShowKey" class="btn ghost">Afficher la clé de d&e9mo</button>
+            <button type="submit" class="btn primary">Se connecter</button>
+          </div>
+          <div id="error" class="alert alert-error" style="display:none;">Clé incorrecte. Vérifiez la saisie.</div>
+        </form>
+        <div class="footer-note">
+          Acc&egrave;s r&eacute;servé à l'administrateur du projet KeffStation.
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script type="module" src="js/script.js"></script>
+</body>
+</html>

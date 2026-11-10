@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rapport statistique - KeffStation</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <!-- Three.js via CDN -->
+  <script src="https://unpkg.com/three@0.164.1/build/three.min.js"></script>
+  <script src="https://unpkg.com/three@0.164.1/examples/js/controls/OrbitControls.js"></script>
+</head>
+<body>
+
+  <nav class="topbar">
+    <div class="brand">KeffStation <span class="dot"></span>Stats</div>
+    <div class="topbar-actions">
+      <a href="../vitrine/index.html" class="btn ghost">&#8592; Vitrine</a>
+      <a href="../admin/index.html" class="btn outline">Admin</a>
+      <button id="btnExport" class="btn primary">Exporter JSON</button>
+    </div>
+  </nav>
+
+  <div class="shell">
+    <aside class="sidebar">
+      <h2>Rapport</h2>
+      <p class="muted">Clics, vues et durée de consultation par page.</p>
+
+      <div class="kpi-row">
+        <div class="kpi">
+          <div class="kpi-value" id="kpiViews">-</div>
+          <div class="kpi-label">Vues totales</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-value" id="kpiClicks">-</div>
+          <div class="kpi-label">Clics totaux</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-value" id="kpiDuration">-</div>
+          <div class="kpi-label">Durée totale (s)</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-value" id="kpiPages">-</div>
+          <div class="kpi-label">Pages suivies</div>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Page</th><th class="num">Vues</th><th class="num">Clics</th><th class="num">Durée (s)</th></tr>
+          </thead>
+          <tbody id="tableBody"></tbody>
+        </table>
+      </div>
+
+      <div class="legend">
+        <div class="legend-title">Graphique 3D « Montagne »</div>
+        <div class="legend-item"><span class="swatch swatch-low"></span> Basse activité</div>
+        <div class="legend-item"><span class="swatch swatch-mid"></span> Activité moyenne</div>
+        <div class="legend-item"><span class="swatch swatch-high"></span> Forte activité</div>
+        <div class="hint">Hauteur = vues · Couleur = durée · Largeur = clics</div>
+      </div>
+    </aside>
+
+    <main class="canvas-panel">
+      <div id="mountain3d"></div>
+      <div class="canvas-overlay">
+        <div class="overlay-title">Visualisation 3D de l'activité</div>
+        <div class="overlay-hint">Faites glisser pour tourner &#8226; Molette pour zoomer</div>
+      </div>
+    </main>
+  </div>
+
+  <script type="module" src="js/script.js"></script>
+</body>
+</html>
