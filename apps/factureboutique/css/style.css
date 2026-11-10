@@ -30,6 +30,48 @@ body {
   box-shadow: 0 10px 25px rgba(0,0,0,0.08);
 }
 
+/* Bloc console de facturation */
+.console-bloc {
+  max-width: 860px;
+  margin: 0 auto 26px;
+}
+.console-bloc-tete {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+  padding: 0 4px;
+}
+.console-bloc-tete h2 {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: -.01em;
+  color: var(--text);
+}
+.console-bloc-tete p {
+  margin: 4px 0 0;
+  font-size: .84rem;
+  color: var(--muted);
+}
+.console-bloc-lien {
+  font-size: .84rem;
+  font-weight: 600;
+  color: var(--primary);
+  text-decoration: none;
+}
+.console-bloc-lien:hover { text-decoration: underline; }
+.console-erreur {
+  border: 1px solid #fecaca;
+  background: #fef2f2;
+  color: #b91c1c;
+  border-radius: 10px;
+  padding: 14px 16px;
+  font-size: .88rem;
+}
+
 /* Header */
 .invoice-header {
   display: flex;

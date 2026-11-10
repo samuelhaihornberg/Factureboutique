@@ -10,23 +10,35 @@ Factureboutique/                     # dépôt racine
 ├── .env.example                     # exemple de variables d'environnement
 ├── .gitignore
 ├── README.md
+├── assets/
+│   └── logo-kiffstation.png         # monogramme KS (tampon de certification)
 ├── data/
-│   └── stats.json                   # données de référence des statistiques
+│   ├── stats.json                   # données de référence des statistiques
+│   ├── kifftech-catalogue.json      # base de référence du catalogue KiffTech
+│   └── kifftech-ventes.json         # facture KiffTech + paramètres de calcul
 └── apps/
-    ├── factureboutique/             # App 1 : générateur de factures (existant)
+    ├── shared/                      # moteur + rendu partagés
+    │   ├── kifftech-engine.js       # lecture catalogue, calcul des prix, compte
+    │   ├── kifftech-console.js      # rendu de la console rétro + tampon
+    │   └── kifftech-console.css     # styles du terminal et du tampon
+    ├── factureboutique/             # App 1 : générateur de factures
     │   ├── index.html
     │   ├── css/style.css
     │   └── js/script.js
-    ├── vitrine/                     # App 2 : page d'accueil / vitrine
+    ├── console/                     # App 2 : console de facturation temps réel
     │   ├── index.html
     │   ├── css/style.css
     │   └── js/script.js
-    ├── admin/                       # App 3 : connexion admin (clé 100 caractères)
+    ├── vitrine/                     # App 3 : page d'accueil / vitrine
+    │   ├── index.html
+    │   ├── css/style.css
+    │   └── js/script.js
+    ├── admin/                       # App 4 : connexion admin (clé 100 caractères)
     │   ├── index.html
     │   ├── css/style.css
     │   ├── js/script.js
     │   └── config.js                # contient la clé admin (démo)
-    └── stats/                       # App 4 : rapport stats + montagne 3D
+    └── stats/                       # App 5 : rapport stats + montagne 3D
         ├── index.html
         ├── css/style.css
         └── js/script.js
@@ -60,6 +72,62 @@ Longueur : 100 caractères alphanumériques.
 Le jeton de connexion est stocké dans `localStorage` (`keff_admin_token`).
 
 > **⚠️ Sécurité :** Pour la démonstration, la clé est présente dans `apps/admin/config.js` et committée. En production, ne jamais commettre un vrai secret : définissez-le via une variable d'environnement `ADMIN_KEY` (voir `.env.example`), ajoutez `.env` au `.gitignore`, et lisez la clé côté serveur.
+
+## Console de facturation — KeffStation × KiffTech
+
+URL : `apps/console/index.html` (aussi affichée en tête de l'app Facture Boutique et sur la carte « Facture Boutique » de la vitrine).
+
+La console lit le catalogue KiffTech **en direct** depuis le dépôt `samuelhaihornberg/keffstation` :
+
+```
+https://raw.githubusercontent.com/samuelhaihornberg/keffstation/main/kifftech/app.v2.js
+```
+
+Si le réseau est indisponible, `data/kifftech-catalogue.json` (base versionnée dans le dépôt) prend le relais. Le bandeau en haut à droite indique la source active : `catalogue live` ou `catalogue local`.
+
+### Règles tarifaires
+
+Identiques à `kifftech/app.v2.js` (`calcKiffTechPrice`) :
+
+```
+prix de vente = prix officiel − 20 % de base
+                + 1 % par article présent en caisse (jusqu'à +7 %)
+                plafond : 27 %
+```
+
+La facture de référence `F-KT-2026-0142` comporte 4 articles, soit une remise de −24 %. Les montants sont affichés en shekels (`₪`) au taux EUR → ILS déclaré dans la console (`3,9266`).
+
+### Le compte
+
+```
+PRIX OFFICIELS (CATALOGUE)          557,58 ₪
+PROMOTIONS −24 %                    −133,51 ₪
+──────────────────────────────────────────────
+TOTAL DE VENTE                       424,07 ₪
+──────────────────────────────────────────────
+PRIX DE GROS (déduction fournisseur)  −254,44 ₪
+PARTS KEFFSTATION (commission)         +38,17 ₪
+INTÉRÊT / FRAIS DE PAIEMENT            +10,18 ₪
+MARGE NETTE REVENDEUR                 +121,28 ₪
+──────────────────────────────────────────────
+TOTAL DE GAIN                         424,07 ₪
+```
+
+Les taux (`tauxGros`, `tauxParts`, `tauxInteret`) sont paramétrables dans `data/kifftech-ventes.json`. La marge nette est calculée en résiduel : la somme du décompte redonne toujours le total de vente.
+
+### Tampon de certification
+
+Le terminal porte un tampon circulaire (monogramme KeffStation, mention « APPROUVÉ ») avec la signature **A.g.u.s**, en surimpression dans le coin inférieur droit.
+
+### Fichiers utiles
+
+| Fichier | Rôle |
+|---|---|
+| `data/kifftech-ventes.json` | facture de référence, taux de change, taux de décomposition |
+| `data/kifftech-catalogue.json` | base de référence du catalogue (repli hors ligne) |
+| `apps/shared/kifftech-engine.js` | lecture du catalogue, calcul des prix, agrégation |
+| `apps/shared/kifftech-console.js` | rendu du terminal et du tampon |
+| `apps/shared/kifftech-console.css` | styles du terminal et du tampon |
 
 ## Rapport statistique — graphique 3D "montagne"
 
@@ -98,4 +166,4 @@ Ce dépôt est configuré pour GitHub Pages. Activez Pages dans les paramètres 
 
 ## Avertissement
 
-Projet fictif à des fins de démonstration/test. Les factures générées sont des documents fictifs.
+Projet de démonstration. La facture `F-KT-2026-0142` est une base de référence versionnée dans le dépôt ; le catalogue et les prix affichés proviennent du dépôt KeffStation (`samuelhaihornberg/keffstation`).

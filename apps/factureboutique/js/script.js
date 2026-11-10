@@ -1,6 +1,17 @@
 // Facture KeffStation par App - Logique JavaScript
 
 (() => {
+  // Console de facturation KiffTech (temps réel) — montée en tête d'app
+  const zoneConsole = document.getElementById('consoleZone');
+  if (zoneConsole && window.KiffTechEngine && window.KiffTechConsole) {
+    window.KiffTechEngine.init()
+      .then(() => window.KiffTechConsole.mount(zoneConsole, {}))
+      .catch((e) => {
+        zoneConsole.innerHTML = '<div class="console-erreur">Console indisponible : ' +
+          (e && e.message ? e.message : e) + '</div>';
+      });
+  }
+
   const DATE_OPTIONS = { year: 'numeric', month: 'long', day: 'numeric' };
 
   // État des articles : description, quantité, prix unitaire

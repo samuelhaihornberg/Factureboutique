@@ -1,0 +1,230 @@
+/* =====================================================================
+   KeffStation × KiffTech — console rétro + tampon de certification
+   ===================================================================== */
+
+/* ------------------------------------------------------------- console */
+.kt-console {
+  position: relative;
+  --kt-encre: #ffb000;
+  --kt-encre-doux: rgba(255, 176, 0, .62);
+  --kt-fond: #060b07;
+}
+
+.kt-crt {
+  position: relative;
+  isolation: isolate;
+  background:
+    radial-gradient(130% 120% at 50% -10%, #10200f 0%, #070d08 55%, #030704 100%);
+  border: 1px solid rgba(255, 176, 0, .26);
+  border-radius: 20px;
+  padding: 26px 28px 30px;
+  box-shadow:
+    inset 0 0 90px rgba(0, 0, 0, .92),
+    inset 0 0 14px rgba(255, 176, 0, .07),
+    0 30px 70px rgba(0, 0, 0, .6),
+    0 0 0 9px rgba(6, 11, 7, .95),
+    0 0 0 10px rgba(255, 176, 0, .1);
+  overflow: hidden;
+  color: var(--kt-encre);
+  font-family: 'IBM Plex Mono', ui-monospace, 'DejaVu Sans Mono', 'Courier New', monospace;
+  font-size: 13.5px;
+  line-height: 1.65;
+  text-shadow: 0 0 7px rgba(255, 176, 0, .45);
+}
+
+/* lignes de balayage + vignette */
+.kt-crt::before {
+  content: "";
+  position: absolute; inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(to bottom, rgba(0, 0, 0, .28) 0 1px, transparent 1px 3px);
+  mix-blend-mode: multiply;
+  opacity: .8;
+  z-index: 3;
+}
+.kt-crt::after {
+  content: "";
+  position: absolute; inset: 0;
+  pointer-events: none;
+  background: radial-gradient(115% 105% at 50% 45%, transparent 52%, rgba(0, 0, 0, .72) 100%);
+  z-index: 2;
+}
+
+.kt-crt > * { position: relative; z-index: 4; }
+
+/* ---------------------------------------------------------------- entête */
+.kt-head {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 10px;
+  border-bottom: 1px dashed rgba(255, 176, 0, .3);
+  padding-bottom: 12px; margin-bottom: 16px;
+  font-size: 11.5px; letter-spacing: .16em; text-transform: uppercase;
+}
+.kt-head .kt-marque { font-weight: 700; letter-spacing: .22em; }
+.kt-head .kt-sep { color: var(--kt-encre-doux); }
+.kt-head .kt-droite { margin-left: auto; display: flex; gap: 12px; align-items: center; }
+.kt-led { width: 9px; height: 9px; border-radius: 50%; background: #35e07a; box-shadow: 0 0 10px #35e07a; }
+.kt-led.wait { background: #ffb000; box-shadow: 0 0 10px #ffb000; animation: kt-blink 1s steps(2, end) infinite; }
+.kt-led.err { background: #ff5a5a; box-shadow: 0 0 10px #ff5a5a; }
+@keyframes kt-blink { 50% { opacity: .25; } }
+
+/* -------------------------------------------------------- bannière ASCII */
+.kt-banner {
+  margin: 0 0 18px;
+  font-family: 'VT323', 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: clamp(5px, 1.35vw, 11px);
+  line-height: 1.05;
+  letter-spacing: .5px;
+  color: var(--kt-encre);
+  opacity: .9;
+  overflow-x: auto;
+  white-space: pre;
+  text-shadow: 0 0 9px rgba(255, 176, 0, .55);
+}
+
+/* --------------------------------------------------------------- lignes */
+.kt-lignes { display: block; }
+.kt-row {
+  display: flex; align-items: baseline; gap: .6rem;
+  white-space: nowrap;
+  font-size: 12.6px;
+}
+.kt-row .kt-lbl { flex: 0 0 auto; opacity: .9; }
+.kt-row .kt-dots { flex: 1 1 auto; border-bottom: 1px dotted rgba(255, 176, 0, .28); transform: translateY(-4px); }
+.kt-row .kt-val { flex: 0 0 auto; font-weight: 600; font-variant-numeric: tabular-nums; }
+.kt-row.neg .kt-val { color: #ff8a5a; }
+.kt-row.pos .kt-val { color: #7dffa8; }
+.kt-row.dim { opacity: .62; font-size: 11.6px; }
+.kt-row.rule { margin: 9px 0 7px; color: var(--kt-encre-doux); letter-spacing: .1em; }
+.kt-row.sous { padding-left: 16px; font-size: 12px; opacity: .95; }
+
+.kt-sep { margin: 12px 0; border: 0; border-top: 1px dashed rgba(255, 176, 0, .3); }
+
+/* --------------------------------------------------------- grand total */
+.kt-tete {
+  display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 16px;
+  margin: 16px 0 20px; padding: 16px 18px;
+  border: 1px solid rgba(255, 176, 0, .4);
+  border-radius: 12px;
+  background: linear-gradient(180deg, rgba(255, 176, 0, .09), rgba(255, 176, 0, .02));
+  box-shadow: inset 0 0 30px rgba(255, 176, 0, .07);
+}
+.kt-tete .kt-tete-lbl { font-size: 11px; letter-spacing: .24em; text-transform: uppercase; opacity: .82; }
+.kt-tete .kt-tete-sub { font-size: 10.6px; opacity: .6; margin-top: 3px; letter-spacing: .05em; }
+.kt-tete .kt-montant {
+  font-size: clamp(2.1rem, 6vw, 3.4rem);
+  font-weight: 700; line-height: 1;
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 0 18px rgba(255, 176, 0, .6);
+  white-space: nowrap;
+}
+.kt-tete .kt-montant .kt-devise { font-size: .48em; opacity: .8; margin-left: .12em; }
+
+/* ---------------------------------------------------------- grille KPI */
+.kt-kpis {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 10px; margin: 18px 0 4px;
+}
+.kt-kpi {
+  border: 1px solid rgba(255, 176, 0, .22);
+  border-radius: 9px; padding: 10px 12px;
+  background: rgba(255, 176, 0, .04);
+}
+.kt-kpi .v { font-size: 1.18rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+.kt-kpi .l { font-size: 9.6px; letter-spacing: .16em; text-transform: uppercase; opacity: .68; margin-top: 3px; }
+
+/* ------------------------------------------------------------- journal */
+.kt-journal {
+  margin-top: 16px; padding-top: 12px;
+  border-top: 1px dashed rgba(255, 176, 0, .26);
+  font-size: 11px; opacity: .78; max-height: 92px; overflow: hidden;
+}
+.kt-journal div { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.kt-journal .h { opacity: .55; }
+.kt-journal .erreur { color: #ff8a5a; opacity: 1; }
+
+.kt-curseur {
+  display: inline-block; width: .6em; height: 1.05em;
+  background: var(--kt-encre); vertical-align: -2px;
+  box-shadow: 0 0 8px var(--kt-encre);
+  animation: kt-blink 1.05s steps(2, end) infinite;
+}
+
+/* ------------------------------------------------------------- tampon */
+.kt-tampon {
+  position: absolute;
+  right: 18px; bottom: 8px;
+  width: clamp(148px, 21vw, 218px);
+  transform: rotate(-9deg);
+  pointer-events: none;
+  z-index: 6;
+  opacity: .93;
+  filter: drop-shadow(0 6px 14px rgba(0, 0, 0, .5));
+}
+.kt-tampon svg { width: 100%; height: auto; display: block; overflow: visible; }
+.kt-tampon .encre { fill: none; stroke: var(--kt-encre); stroke-width: 3; }
+.kt-tampon .encre-fine { fill: none; stroke: var(--kt-encre); stroke-width: 1.4; opacity: .85; }
+.kt-tampon .texte-anneau {
+  fill: var(--kt-encre); font-size: 13.5px; font-weight: 700;
+  letter-spacing: 2.4px; font-family: 'IBM Plex Mono', monospace;
+}
+.kt-tampon .texte-centre {
+  fill: var(--kt-encre); font-size: 15px; font-weight: 700;
+  letter-spacing: 4px; font-family: 'IBM Plex Mono', monospace;
+}
+.kt-tampon .texte-bandeau {
+  fill: #050a06; font-size: 15px; font-weight: 700;
+  letter-spacing: 3.4px; font-family: 'IBM Plex Mono', monospace;
+}
+.kt-tampon .disque { fill: rgba(255, 176, 0, .07); stroke: var(--kt-encre); stroke-width: 2; }
+.kt-tampon .logo { position: absolute; left: 50%; top: 41%; transform: translate(-50%, -50%); width: 46%; filter: sepia(1) saturate(4.4) hue-rotate(-18deg) brightness(1.35) contrast(.9); opacity: .95; }
+.kt-tampon .signature { position: absolute; left: 50%; bottom: -8%; transform: translateX(-46%) rotate(-3deg); width: 92%; }
+.kt-tampon .signature path { fill: none; stroke: var(--kt-encre); stroke-width: 3.4; stroke-linecap: round; stroke-linejoin: round; opacity: .92; }
+.kt-tampon .signature .flèche { stroke-width: 2.2; opacity: .6; }
+
+/* --------------------------------------------------- variante sur papier */
+.kt-console.papier {
+  --kt-encre: #14417a;
+  --kt-encre-doux: rgba(20, 65, 122, .6);
+}
+.kt-console.papier .kt-crt {
+  background: linear-gradient(180deg, #fdfaf2 0%, #f6f0e2 100%);
+  border-color: rgba(20, 65, 122, .3);
+  color: var(--kt-encre);
+  text-shadow: none;
+  box-shadow: 0 18px 44px rgba(0, 0, 0, .28), 0 0 0 9px rgba(253, 250, 242, .9), 0 0 0 10px rgba(20, 65, 122, .18);
+}
+.kt-console.papier .kt-crt::before { background: repeating-linear-gradient(to bottom, rgba(20, 65, 122, .05) 0 1px, transparent 1px 4px); mix-blend-mode: multiply; opacity: .5; }
+.kt-console.papier .kt-crt::after { background: radial-gradient(120% 110% at 50% 40%, transparent 60%, rgba(120, 100, 60, .16) 100%); }
+.kt-console.papier .kt-tete { background: linear-gradient(180deg, rgba(20, 65, 122, .07), rgba(20, 65, 122, .01)); border-color: rgba(20, 65, 122, .32); box-shadow: inset 0 0 26px rgba(20, 65, 122, .05); }
+.kt-console.papier .kt-tete .kt-montant { text-shadow: none; }
+.kt-console.papier .kt-row.neg .kt-val { color: #a4431f; }
+.kt-console.papier .kt-row.pos .kt-val { color: #14663f; }
+.kt-console.papier .kt-tampon .logo { filter: none; opacity: .92; }
+.kt-console.papier .kt-tampon .texte-bandeau { fill: #fdfaf2; }
+
+/* ------------------------------------------------------------ vignette */
+.kt-vignette {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(148px, 1fr));
+  gap: 12px; margin-top: 16px;
+}
+.kt-vignette .vt {
+  border: 1px solid var(--kt-surface-2, rgba(255, 255, 255, .1));
+  border-radius: 12px; padding: 14px 16px;
+  background: var(--kt-surface, rgba(255, 255, 255, .04));
+}
+.kt-vignette .vt .v { font-size: 1.5rem; font-weight: 800; font-variant-numeric: tabular-nums; }
+.kt-vignette .vt .l { font-size: .74rem; letter-spacing: .1em; text-transform: uppercase; opacity: .66; margin-top: 4px; }
+
+.kt-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+
+@media (max-width: 720px) {
+  .kt-crt { padding: 20px 16px 24px; font-size: 12px; }
+  .kt-tete { grid-template-columns: 1fr; gap: 8px; }
+  .kt-tampon { width: 132px; right: 6px; bottom: -4px; opacity: .8; }
+  .kt-row { white-space: normal; }
+  .kt-row .kt-dots { display: none; }
+}
+@media print {
+  .kt-crt { box-shadow: none; }
+  .kt-crt::before, .kt-crt::after { display: none; }
+}

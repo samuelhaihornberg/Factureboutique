@@ -161,6 +161,31 @@ a { color: inherit; text-decoration: none; }
 .app-icon { font-size: 42px; line-height: 1; margin-bottom: 16px; display: inline-block; }
 .app-card h3 { margin: 0 0 10px; font-size: 1.25rem; }
 .app-card p { margin: 0 0 20px; font-size: 0.95rem; color: var(--muted); }
+.app-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+
+/* KPI de facturation affiché sur la carte Facture Boutique */
+.app-kpi {
+  background: var(--dark);
+  border: 1px solid var(--surface-2);
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin: 0 0 16px;
+  text-align: left;
+}
+.app-kpi-valeur {
+  font-size: 1.65rem;
+  font-weight: 800;
+  color: var(--primary);
+  font-variant-numeric: tabular-nums;
+  line-height: 1.15;
+}
+.app-kpi-libelle {
+  margin-top: 3px;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+}
 
 /* Stats section */
 .stats-section { padding: 70px 0; }

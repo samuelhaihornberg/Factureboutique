@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Console de facturation - KeffStation x KiffTech</title>
+  <meta name="description" content="Console KeffStation : statistiques de facturation KiffTech en temps reel, promotions, prix officiels, prix de gros, parts et interets.">
+  <link rel="stylesheet" href="../shared/kifftech-console.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=VT323&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <nav class="topbar">
+    <a class="brand" href="../vitrine/index.html">KeffStation <span class="sep">//</span> <span class="brand-sub">Console</span></a>
+    <div class="topbar-actions">
+      <a class="btn ghost" href="../vitrine/index.html">&#8592; Vitrine</a>
+      <a class="btn ghost" href="../factureboutique/index.html">Facture</a>
+      <a class="btn outline" id="btnSync" href="#" rel="noopener">Actualiser</a>
+      <button class="btn outline" id="btnExport" type="button">Exporter JSON</button>
+      <button class="btn primary" id="btnPrint" type="button">Imprimer</button>
+    </div>
+  </nav>
+
+  <main class="shell">
+    <section class="hero">
+      <div class="hero-left">
+        <h1>Console de facturation <span class="accent">KiffTech</span></h1>
+        <p>Statistiques de facturation en temps r&eacute;el, aliment&eacute;es par le catalogue du d&eacute;p&ocirc;t KeffStation. Prix officiels, promotions, prix de gros en d&eacute;duction, parts et int&eacute;r&ecirc;t.</p>
+        <div class="liens">
+          <a class="lien" id="lienDepot" href="https://github.com/samuelhaihornberg/keffstation" target="_blank" rel="noopener">&#128279; D&eacute;p&ocirc;t keffstation</a>
+          <a class="lien" id="lienSite" href="https://kiffstation.com" target="_blank" rel="noopener">&#127760; kiffstation.com</a>
+          <a class="lien" id="lienPages" href="https://samuelhaihornberg.github.io/keffstation/" target="_blank" rel="noopener">&#128193; Pages KeffStation</a>
+        </div>
+      </div>
+      <div class="hero-right">
+        <div class="puce" id="puceSource">
+          <span class="pastille"></span>
+          <span id="puceTexte">Connexion au catalogue…</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="consoleZone" class="console-zone"></section>
+
+    <section class="notes">
+      <div class="note">
+        <h3>Calcul</h3>
+        <p>Prix de vente = prix officiel &minus;20 % de base, +1 % par article pr&eacute;sent en caisse (jusqu'&agrave; +7 %, plafond 27 %). Les montants sont convertis en shekels au taux d&eacute;clar&eacute; par la console.</p>
+      </div>
+      <div class="note">
+        <h3>Compte</h3>
+        <p>Le prix de gros est d&eacute;duit du prix de vente factur&eacute;. S'y ajoutent les parts KeffStation et l'int&eacute;r&ecirc;t de paiement. La marge nette r&eacute;siduelle compl&egrave;te le total de gain.</p>
+      </div>
+      <div class="note">
+        <h3>Source</h3>
+        <p>Le catalogue est relu depuis le d&eacute;p&ocirc;t KeffStation en direct. En cas d'indisponibilit&eacute;, une base de r&eacute;f&eacute;rence versionn&eacute;e dans le d&eacute;p&ocirc;t prend le relais.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>KeffStation &mdash; Console de facturation KiffTech &middot; <a href="../vitrine/index.html">Retour &agrave; la vitrine</a></p>
+  </footer>
+
+  <script src="../shared/kifftech-engine.js"></script>
+  <script src="../shared/kifftech-console.js"></script>
+  <script src="js/script.js"></script>
+</body>
+</html>

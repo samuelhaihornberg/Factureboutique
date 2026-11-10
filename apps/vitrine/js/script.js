@@ -5,6 +5,7 @@
   const TRACKED_PAGES = [
     { path: 'apps/vitrine/index.html', label: 'Vitrine' },
     { path: 'apps/factureboutique/index.html', label: 'Facture Boutique' },
+    { path: 'apps/console/index.html', label: 'Console de facturation' },
     { path: 'apps/admin/index.html', label: 'Admin' },
     { path: 'apps/stats/index.html', label: 'Rapport statistiques' }
   ];
@@ -29,8 +30,8 @@
   }
 
   // Compte une vue à chaque chargement de cette page
-  const current = location.pathname.split('/').slice(-2).join('/');
-  const match = TRACKED_PAGES.find(p => p.path === current) || { path: current, label: current };
+  const current = (location.pathname.replace(/\/+$/, '') || '/');
+  const match = TRACKED_PAGES.find(p => current.endsWith(p.path)) || { path: current, label: current };
   const now = Date.now();
   let s = getStats();
   if (!s[match.path]) s[match.path] = { views: 0, clicks: 0, duration: 0, sessions: 0, _start: now };
@@ -86,10 +87,26 @@
   // Bouton admin -> ouvre la page admin
   const btnAdmin = document.getElementById('btnAdmin');
   const btnOpenAdmin = document.getElementById('btnOpenAdmin');
-  const adminUrl = 'apps/admin/index.html';
+  const adminUrl = '../admin/index.html';
   function openAdmin() { window.location.href = adminUrl; }
   if (btnAdmin) btnAdmin.addEventListener('click', (e) => { e.preventDefault(); openAdmin(); });
   if (btnOpenAdmin) btnOpenAdmin.addEventListener('click', (e) => { e.preventDefault(); openAdmin(); });
+
+  // Statistiques de facturation KiffTech affichées en direct sur la carte
+  const kpiValeur = document.getElementById('appKpiValeur');
+  if (kpiValeur && window.KiffTechEngine) {
+    window.KiffTechEngine.init().then(() => {
+      const maj = () => {
+        const r = window.KiffTechEngine.etat.rapport;
+        if (!r) return;
+        kpiValeur.textContent = window.KiffTechEngine.formatMontant(r.totalVente) + ' ' + r.symbole;
+      };
+      maj();
+      window.KiffTechEngine.onUpdate(maj);
+    }).catch(() => {
+      kpiValeur.textContent = '—';
+    });
+  }
 
   render();
 })();

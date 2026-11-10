@@ -3,10 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Facture fictive - KeffStation par App</title>
+  <title>Facture - KeffStation par App</title>
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="../shared/kifftech-console.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=VT323&display=swap" rel="stylesheet">
 </head>
 <body>
+
+  <section class="console-bloc">
+    <div class="console-bloc-tete">
+      <div>
+        <h2>Statistiques de facturation en direct</h2>
+        <p>Consolid&eacute;es depuis le catalogue KiffTech du d&eacute;p&ocirc;t KeffStation.</p>
+      </div>
+      <a class="console-bloc-lien" href="../console/index.html">Console compl&egrave;te &rarr;</a>
+    </div>
+    <div id="consoleZone"></div>
+  </section>
 
   <div class="invoice-container">
 
@@ -44,7 +59,7 @@
       <div class="party to">
         <h3>Facturé à</h3>
         <div id="to-details" contenteditable="true">
-          <strong>Client fictif</strong><br>
+          <strong>Client</strong><br>
           45 Rue de l'Exemple<br>
           69000 Lyon, France<br>
           client@exemple.com
@@ -90,7 +105,7 @@
 
     <div class="footer">
       <p>Merci pour votre confiance chez <strong>KeffStation par App</strong>.</p>
-      <p><em>Facture générée à des fins de test de revenu — document fictif.</em></p>
+      <p><em>Facture &eacute;tablie par KeffStation &mdash; catalogue KiffTech.</em></p>
     </div>
 
     <div class="actions">
@@ -100,6 +115,8 @@
 
   </div>
 
+  <script src="../shared/kifftech-engine.js"></script>
+  <script src="../shared/kifftech-console.js"></script>
   <script src="js/script.js"></script>
 </body>
 </html>

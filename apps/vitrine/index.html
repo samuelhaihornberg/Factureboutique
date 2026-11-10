@@ -25,7 +25,8 @@
       <p>Une plateforme unique r&eacute;unissant plusieurs applications : facturation, statistiques, administration et plus encore.</p>
       <div class="hero-actions">
         <a href="#applications" class="btn btn-primary">Voir les applications</a>
-        <a href="apps/stats/index.html" class="btn btn-outline">Rapport statistique</a>
+        <a href="../stats/index.html" class="btn btn-outline">Rapport statistique</a>
+        <a href="../console/index.html" class="btn btn-outline">Console de facturation</a>
       </div>
     </div>
     <div class="hero-visual">
@@ -37,11 +38,18 @@
     <div class="container">
       <h2>Nos applications</h2>
       <div class="apps-grid">
-        <article class="app-card">
+        <article class="app-card app-card-facture">
           <div class="app-icon">&#128202;</div>
           <h3>Facture Boutique</h3>
-          <p>G&eacute;n&eacute;ration de factures fictives pour test, TVA, totaux, impression.</p>
-          <a href="apps/factureboutique/index.html" class="btn btn-sm">Ouvrir l'app</a>
+          <p>G&eacute;n&eacute;ration de factures, TVA, totaux, impression et statistiques de facturation en temps r&eacute;el.</p>
+          <div class="app-kpi" id="appKpi">
+            <div class="app-kpi-valeur" id="appKpiValeur">&mdash;</div>
+            <div class="app-kpi-libelle">Total de vente KiffTech</div>
+          </div>
+          <div class="app-actions">
+            <a href="../factureboutique/index.html" class="btn btn-sm">Ouvrir l'app</a>
+            <a href="../console/index.html" class="btn btn-sm btn-outline">Statistiques</a>
+          </div>
         </article>
         <article class="app-card">
           <div class="app-icon">&#128200;</div>
@@ -80,16 +88,19 @@
           <div class="stat-label">Pages suivies</div>
         </div>
       </div>
-      <p class="note">D&eacute;tail compl&egrave;t et graphique 3D : <a href="apps/stats/index.html">Rapport statistique complet</a></p>
+      <p class="note">Rapport statistique complet : <a href="../stats/index.html">d&eacute;tail et graphique 3D</a></p>
+      <p class="note">Facturation KiffTech en temps r&eacute;el : <a href="../console/index.html">Console de facturation</a></p>
     </div>
   </section>
 
   <footer class="footer">
     <div class="container">
-      <p>&copy; 2026 KeffStation par App. Projet fictif &agrave; des fins de d&e9monstration.</p>
+      <p>&copy; 2026 KeffStation par App.</p>
     </div>
   </footer>
 
+  <script src="../shared/kifftech-engine.js"></script>
+  <script src="../shared/kifftech-console.js"></script>
   <script src="js/script.js"></script>
 </body>
 </html>
