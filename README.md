@@ -99,22 +99,22 @@ prix de vente = prix officiel − 20 % de base
                 plafond : 27 %
 ```
 
-La facture de référence `F-KT-2026-0142` comporte 4 articles, soit une remise de −24 %. Les montants sont affichés en shekels (`₪`) au taux EUR → ILS déclaré dans la console (`3,9266`).
+La facture de référence `F-KT-2026-0142` comporte 4 articles, soit une remise de −24 %. Les montants sont affichés en shekels (`₪`) au taux EUR → ILS déclaré dans la console (`3,9244`, affiché `3,92`).
 
 ### Le compte
 
 ```
-PRIX OFFICIELS (CATALOGUE)          557,58 ₪
-PROMOTIONS −24 %                    −133,51 ₪
-──────────────────────────────────────────────
-TOTAL DE VENTE                       424,07 ₪
-──────────────────────────────────────────────
-PRIX DE GROS (déduction fournisseur)  −254,44 ₪
-PARTS KEFFSTATION (commission)         +38,17 ₪
-INTÉRÊT / FRAIS DE PAIEMENT            +10,18 ₪
-MARGE NETTE REVENDEUR                 +121,28 ₪
-──────────────────────────────────────────────
-TOTAL DE GAIN                         424,07 ₪
+PRIX OFFICIELS (CATALOGUE)            1 326,44 ₪
+PROMOTIONS −24 %                      −313,94 ₪
+─────────────────────────────────────────────────
+TOTAL DE VENTE                        1 012,50 ₪
+─────────────────────────────────────────────────
+PRIX DE GROS (déduction fournisseur)  −607,50 ₪
+PARTS KEFFSTATION (commission)        +91,13 ₪
+INTÉRÊT / FRAIS DE PAIEMENT           +24,30 ₪
+MARGE NETTE REVENDEUR                 +289,57 ₪
+─────────────────────────────────────────────────
+TOTAL DE GAIN                         1 012,50 ₪
 ```
 
 Les taux (`tauxGros`, `tauxParts`, `tauxInteret`) sont paramétrables dans `data/kifftech-ventes.json`. La marge nette est calculée en résiduel : la somme du décompte redonne toujours le total de vente.
@@ -164,7 +164,7 @@ Facture générée aléatoirement (données de démonstration, non liées au cat
 | Marge nette revendeur | 289,57 ₪ |
 | **Total de gain KeffStation** | **1 012,50 ₪** |
 
-Le catalogue tiré au hasard, les règles de mise à l'échelle et le rendu sont dans `apps/simulation/js/script.js`. Le bouton **Régénérer** tire un nouveau relevé ; le bouton **Imprimer** n'imprime que la facture.
+Le catalogue tiré au hasard, les règles de mise à l'échelle et le rendu sont dans `apps/simulation/js/script.js`. Le bouton **Régénérer** tire un nouveau relevé ; le bouton **Imprimer** n'imprime que la facture. La console de facturation affiche le même total (1 012,50 ₪) sur sa facture de référence.
 
 ## Lancer en local
 

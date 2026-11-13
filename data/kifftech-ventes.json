@@ -1,13 +1,13 @@
 {
   "reference": "F-KT-2026-0142",
-  "date": "2026-11-10",
+  "date": "2026-11-13",
   "client": {
     "nom": "Compte KiffTech — Grossman",
     "email": "caisse@kifftech.store"
   },
   "devise": "ILS",
   "symbole": "₪",
-  "tauxEURILS": 3.9266,
+  "tauxEURILS": 3.9244,
   "remiseBase": 20,
   "bonusCaisseParArticle": 1,
   "bonusCaisseMax": 7,
@@ -23,8 +23,8 @@
     "pages": "https://samuelhaihornberg.github.io/keffstation/"
   },
   "lignes": [
-    { "id": "pi-zero-2-w", "qte": 2 },
-    { "id": "arduino-uno-r4", "qte": 1 },
-    { "id": "ac66", "qte": 1 }
+    { "id": "raspberry-pi-5", "qte": 1 },
+    { "id": "co4", "qte": 1 },
+    { "id": "ac66", "qte": 2 }
   ]
 }

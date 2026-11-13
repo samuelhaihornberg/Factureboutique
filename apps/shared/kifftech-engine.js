@@ -19,8 +19,8 @@
 
   /* Copie de secours : sert quand le JSON n'est pas accessible (ouverture file://) */
   var FACTURE_SECOURS = {
-    reference: 'F-KT-2026-0142', date: '2026-11-10',
-    devise: 'ILS', symbole: '₪', tauxEURILS: 3.9266,
+    reference: 'F-KT-2026-0142', date: '2026-11-13',
+    devise: 'ILS', symbole: '₪', tauxEURILS: 3.9244,
     remiseBase: 20, bonusCaisseParArticle: 1, bonusCaisseMax: 7, plafondRemise: 27,
     tauxGros: 0.6, tauxParts: 0.09, tauxInteret: 0.024,
     source: {
@@ -28,7 +28,7 @@
       catalogue: 'https://raw.githubusercontent.com/samuelhaihornberg/keffstation/main/kifftech/app.v2.js',
       site: 'https://kiffstation.com', pages: 'https://samuelhaihornberg.github.io/keffstation/'
     },
-    lignes: [{ id: 'pi-zero-2-w', qte: 2 }, { id: 'arduino-uno-r4', qte: 1 }, { id: 'ac66', qte: 1 }]
+    lignes: [{ id: 'raspberry-pi-5', qte: 1 }, { id: 'co4', qte: 1 }, { id: 'ac66', qte: 2 }]
   };
 
   /* ---------------------------------------------------------------- utils */
