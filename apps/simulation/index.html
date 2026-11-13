@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simulation de facture - KeffStation × kifftech.store</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=Inter:wght@400;600;700;800&family=Playfair+Display:ital,wght@0,700;0,900;1,600;1,700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <nav class="barre">
+    <a class="barre-retour" href="../vitrine/index.html">&larr; Vitrine</a>
+    <span class="barre-titre">Simulation de facture</span>
+    <button type="button" class="barre-action" id="btnImprimer">Imprimer</button>
+  </nav>
+
+  <main class="page">
+    <article class="facture" aria-labelledby="titre-facture">
+
+      <header class="entete">
+        <div class="marque">
+          <img class="marque-logo" src="../../assets/logo-kiffstation.png" alt="">
+          <div>
+            <div class="marque-nom">KeffStation</div>
+            <div class="marque-partenaire">× kifftech.store</div>
+          </div>
+        </div>
+        <div class="titre">
+          <p class="surtitre">Relevé de ventes &amp; commissions</p>
+          <h1 id="titre-facture">Facture</h1>
+        </div>
+      </header>
+
+      <dl class="meta">
+        <div><dt>N° de facture</dt><dd id="numero"></dd></div>
+        <div><dt>Date d'émission</dt><dd id="date"></dd></div>
+        <div><dt>Période</dt><dd id="periode"></dd></div>
+      </dl>
+
+      <section class="parties">
+        <div>
+          <h2>Émetteur</h2>
+          <p><strong>KeffStation</strong><br>kifftech.store<br>contact@keffstation.app</p>
+        </div>
+        <div>
+          <h2>Facturé à</h2>
+          <p><strong>Compte KiffTech — Exemple</strong><br>client@exemple.com</p>
+        </div>
+      </section>
+
+      <section class="bloc">
+        <h2 class="bloc-titre">Relevé des ventes</h2>
+        <div class="table-wrap">
+          <table class="ventes">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Article</th>
+                <th class="num">Qté</th>
+                <th class="num">Prix unit.</th>
+                <th class="num">Montant</th>
+              </tr>
+            </thead>
+            <tbody id="ventes"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="bloc">
+        <h2 class="bloc-titre">Commissions</h2>
+        <div id="commissions"></div>
+      </section>
+
+      <section class="recap">
+        <div class="ligne"><span>Total des ventes</span><span class="pointilles"></span><span class="val" id="recap-ventes"></span></div>
+        <div class="ligne"><span>Total des commissions</span><span class="pointilles"></span><span class="val" id="recap-commissions"></span></div>
+        <div class="ligne total"><span>Total</span><span class="val" id="recap-total"></span></div>
+        <div class="tampon" aria-hidden="true">
+          <span>KeffStation</span>
+          <b>&#9733; 2026 &#9733;</b>
+          <span>kifftech.store</span>
+        </div>
+      </section>
+
+      <footer class="pied">
+        <div class="code-barre" aria-hidden="true"></div>
+        <p>Merci de votre confiance · KeffStation × kifftech.store</p>
+      </footer>
+
+    </article>
+  </main>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

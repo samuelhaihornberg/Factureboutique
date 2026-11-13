@@ -38,7 +38,11 @@ Factureboutique/                     # dépôt racine
     │   ├── css/style.css
     │   ├── js/script.js
     │   └── config.js                # contient la clé admin (démo)
-    └── stats/                       # App 5 : rapport stats + montagne 3D
+    ├── stats/                       # App 5 : rapport stats + montagne 3D
+    │   ├── index.html
+    │   ├── css/style.css
+    │   └── js/script.js
+    └── simulation/                  # App 6 : simulation de facture (relevé de ventes & commissions)
         ├── index.html
         ├── css/style.css
         └── js/script.js
@@ -142,6 +146,20 @@ Affiche :
   - **Largeur** = nombre de clics
 
 Les données de suivi (vues, clics, durée) sont collectées côté navigateur et stockées dans `localStorage` (`keffstation_stats`). Un bouton **Exporter JSON** permet de télécharger les données.
+
+## Simulation de facture
+
+URL : `apps/simulation/index.html` — accessible via le badge **Simulation** dans le footer de la vitrine.
+
+Facture fictive (données de démonstration, non liées au catalogue) : relevé de ventes de plusieurs articles populaires et commissions KeffStation / kifftech.store.
+
+| Élément | Montant |
+|---|---|
+| Total des ventes (6 lignes d'articles) | 1 012,00 ₪ |
+| Total des commissions | 0,50 ₪ |
+| **Total** | **1 012,50 ₪** |
+
+Les lignes de vente et les commissions sont définies dans l'objet `FACTURE` de `apps/simulation/js/script.js`. Le bouton **Imprimer** n'imprime que la facture.
 
 ## Lancer en local
 
