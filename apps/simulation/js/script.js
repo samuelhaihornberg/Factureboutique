@@ -8,9 +8,10 @@
 
   const DATE_FACTURE = '2026-11-13';
   const PERIODE = ['2026-11-01', '2026-11-13'];
-  const BENEFICE_CIBLE = 101200;   // centimes : marge KeffStation visée
-  const TAUX_MARGE = 0.25;         // marge KeffStation sur le total des ventes
-  const TAUX_COMMISSION = 0.01;    // commission kifftech.store
+  const VENTES_CIBLE = 101250;     // centimes : total des ventes visé (1 012,50 ₪)
+  const TAUX_GROS = 0.6;          // part fournisseur
+  const TAUX_PARTS = 0.09;        // parts KeffStation
+  const TAUX_INTERET = 0.024;     // intérêt / frais de paiement
   const PRIX_ABONNEMENT = 24900;   // centimes
   const NB_CLIENTS = 8;
   const NB_ABONNES = 2;
@@ -89,7 +90,7 @@
 
     const sousTotal = produits.reduce((s, l) => s + l.prix * l.qte, 0);
     const totalAbonnements = abonnements.reduce((s, l) => s + l.prix * l.qte, 0);
-    const cible = Math.round(BENEFICE_CIBLE / TAUX_MARGE) - totalAbonnements;
+    const cible = VENTES_CIBLE - totalAbonnements;
     if (sousTotal <= 0) return;
 
     const k = cible / sousTotal;
@@ -114,9 +115,12 @@
       ventes += l.prix * l.qte;
       articles += l.qte;
     }));
-    const benefice = Math.round(ventes * TAUX_MARGE);
-    const commission = Math.round(ventes * TAUX_COMMISSION);
-    return { ventes, articles, benefice, commission, total: ventes + benefice + commission };
+    // Décompte du total de vente, comme dans la console KeffStation.
+    const gros = Math.round(ventes * TAUX_GROS);
+    const parts = Math.round(ventes * TAUX_PARTS);
+    const interet = Math.round(ventes * TAUX_INTERET);
+    const marge = ventes - gros - parts - interet;
+    return { ventes, articles, gros, parts, interet, marge, total: gros + parts + interet + marge };
   }
 
   function numeroAleatoire() {
@@ -159,10 +163,12 @@
         </article>`;
     }).join('');
 
-    byId('recap-detail').textContent = '(' + NB_CLIENTS + ' clients · ' + t.articles + ' articles)';
+    byId('recap-detail').textContent = '(' + NB_CLIENTS + ' clients · ' + t.articles + ' articles · ' + nbAbonnes + ' abonnements)';
     byId('recap-ventes').textContent = montant(t.ventes);
-    byId('recap-benefice').textContent = montant(t.benefice);
-    byId('recap-commission').textContent = montant(t.commission);
+    byId('recap-gros').textContent = montant(t.gros);
+    byId('recap-parts').textContent = montant(t.parts);
+    byId('recap-interet').textContent = montant(t.interet);
+    byId('recap-marge').textContent = montant(t.marge);
     byId('recap-total').textContent = montant(t.total);
   }
 

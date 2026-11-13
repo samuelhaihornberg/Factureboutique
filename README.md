@@ -153,14 +153,16 @@ URL : `apps/simulation/index.html` — accessible via le badge **Simulation** da
 
 La mention « Simulation — données de démonstration » figure dans le pied de page général de l'application (vitrine et page de simulation), hors de la facture : la facture, son titre, son en-tête et son rendu imprimable ou exporté ne portent aucune mention.
 
-Facture générée aléatoirement (données de démonstration, non liées au catalogue) : 8 clients aux caisses remplies, dont 2 avec un abonnement KeffStation. Produits, quantités et prix sont tirés au hasard à chaque affichage, puis mis à l'échelle pour que la marge KeffStation tombe exactement sur 1 012,00 ₪.
+Facture générée aléatoirement (données de démonstration, non liées au catalogue) : 8 clients aux caisses remplies, dont 2 avec un abonnement KeffStation. Produits, quantités et prix sont tirés au hasard à chaque affichage, puis mis à l'échelle pour que le total des ventes tombe exactement sur 1 012,50 ₪.
 
 | Élément | Montant |
 |---|---|
-| Total des ventes (8 clients) | 4 048,00 ₪ |
-| Marge KeffStation (25 %) | 1 012,00 ₪ |
-| Commission kifftech.store (1 %) | 40,48 ₪ |
-| **Total** | **5 100,48 ₪** |
+| Total des ventes (8 clients) | 1 012,50 ₪ |
+| Prix de gros (part fournisseur) | 607,50 ₪ |
+| Parts KeffStation (commission) | 91,13 ₪ |
+| Intérêt / frais de paiement | 24,30 ₪ |
+| Marge nette revendeur | 289,57 ₪ |
+| **Total de gain KeffStation** | **1 012,50 ₪** |
 
 Le catalogue tiré au hasard, les règles de mise à l'échelle et le rendu sont dans `apps/simulation/js/script.js`. Le bouton **Régénérer** tire un nouveau relevé ; le bouton **Imprimer** n'imprime que la facture.
 
