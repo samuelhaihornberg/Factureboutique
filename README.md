@@ -151,6 +151,8 @@ Les données de suivi (vues, clics, durée) sont collectées côté navigateur e
 
 URL : `apps/simulation/index.html` — accessible via le badge **Simulation** dans le footer de la vitrine.
 
+La mention « Simulation — données de démonstration » figure dans le pied de page général de l'application (vitrine et page de simulation), hors de la facture : la facture, son titre, son en-tête et son rendu imprimable ou exporté ne portent aucune mention.
+
 Facture fictive (données de démonstration, non liées au catalogue) : relevé de ventes de plusieurs articles populaires et commissions KeffStation / kifftech.store.
 
 | Élément | Montant |
