@@ -334,12 +334,25 @@ body {
   opacity: .85;
 }
 
+/* Pied de page général (hors facture, non imprimé) */
+.pied-general {
+  margin-top: 22px;
+  padding: 0 16px;
+  text-align: center;
+  font-family: var(--mono);
+  font-size: .72rem;
+  letter-spacing: .08em;
+  color: var(--muted);
+}
+.pied-general p { margin: 0; }
+
 /* Impression : seule la facture reste */
 @media print {
   @page { margin: 12mm; }
   * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   body { background: #fff; }
   .barre { display: none; }
+  .pied-general { display: none; }
   .page { padding: 0; }
   .facture {
     max-width: none;
